@@ -1,10 +1,14 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
+
+import Header from '../components/Header';
+import PostList from '../components/PostList';
 
 const Home = () => {
   return (
     <View>
-      <Text>Ini Page Home</Text>
+      <Header />
+      <PostList />
     </View>
   );
 }
