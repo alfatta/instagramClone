@@ -4,12 +4,17 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 
 import Explore from '../screens/Explore';
 import CameraNavigator from './CameraNavigator';
+import Favorit from '../screens/Favorit';
+import Profile from '../screens/Profile';
+import AddPost from '../screens/AddPost';
 
 const BottomTab = createBottomTabNavigator()
 
 const navigatorScreenOptions = ({ route }) => {
   return {
     headerShown: false,
+    tabBarActiveTintColor: 'black',
+    tabBarInactiveTintColor: 'black',
     tabBarShowLabel: false,
     tabBarIcon: ({ focused, color, size }) => {
       let iconName;
@@ -20,6 +25,15 @@ const navigatorScreenOptions = ({ route }) => {
           break;
         case 'Explore':
           iconName = focused ? 'search' : 'search-outline'
+          break;
+        case 'AddPost':
+          iconName = focused ? 'add-circle' : 'add-circle-outline'
+          break;
+        case 'Favorit':
+          iconName = focused ? 'heart' : 'heart-outline'
+          break;
+        case 'Profile':
+          iconName = focused ? 'person' : 'person-outline'
           break;
       }
 
@@ -33,6 +47,9 @@ const MainNavigator = () => {
     <BottomTab.Navigator screenOptions={ navigatorScreenOptions }>
       <BottomTab.Screen component={ CameraNavigator } name="CameraNavigator" />
       <BottomTab.Screen component={ Explore } name="Explore" />
+      <BottomTab.Screen component={ AddPost } name="AddPost" />
+      <BottomTab.Screen component={ Favorit } name="Favorit" />
+      <BottomTab.Screen component={ Profile } name="Profile" />
     </BottomTab.Navigator>
   );
 }
