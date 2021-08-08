@@ -3,10 +3,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
 import Explore from '../screens/Explore';
-import CameraNavigator from './CameraNavigator';
 import Favorit from '../screens/Favorit';
 import Profile from '../screens/Profile';
 import AddPost from '../screens/AddPost';
+import Home from '../screens/Home';
 
 const BottomTab = createBottomTabNavigator()
 
@@ -20,7 +20,7 @@ const navigatorScreenOptions = ({ route }) => {
       let iconName;
 
       switch (route.name) {
-        case 'CameraNavigator':
+        case 'Home':
           iconName = focused ? 'home' : 'home-outline'
           break;
         case 'Explore':
@@ -45,7 +45,7 @@ const navigatorScreenOptions = ({ route }) => {
 const MainNavigator = () => {
   return (
     <BottomTab.Navigator screenOptions={ navigatorScreenOptions }>
-      <BottomTab.Screen component={ CameraNavigator } name="CameraNavigator" />
+      <BottomTab.Screen component={ Home } name="Home" />
       <BottomTab.Screen component={ Explore } name="Explore" />
       <BottomTab.Screen component={ AddPost } name="AddPost" />
       <BottomTab.Screen component={ Favorit } name="Favorit" />

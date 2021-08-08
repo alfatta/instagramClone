@@ -1,13 +1,12 @@
 import React from 'react';
-import { SafeAreaView, View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native'
 
-import MainNavigator from './src/navigators/MainNavigator';
+import CameraNavigator from './src/navigators/CameraNavigator';
 
 const App = () => {
   return (
     <NavigationContainer>
-      <MainNavigator />
+      <CameraNavigator />
     </NavigationContainer>
   );
 }
