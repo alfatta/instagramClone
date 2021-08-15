@@ -21,3 +21,13 @@ export const getRandomPhoto = (count = 20) => {
     }
   })
 }
+
+export const searchPhoto = (query, page = 1, per_page = 15) => {
+  return axios.get('/search/photos', {
+    params: {
+      query,
+      page,
+      per_page,
+    }
+  })
+}

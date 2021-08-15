@@ -44,7 +44,7 @@ const navigatorScreenOptions = ({ route }) => {
 
 const MainNavigator = () => {
   return (
-    <BottomTab.Navigator screenOptions={ navigatorScreenOptions }>
+    <BottomTab.Navigator screenOptions={ navigatorScreenOptions } initialRouteName="Explore">
       <BottomTab.Screen component={ CameraNavigator } name="CameraNavigator" />
       <BottomTab.Screen component={ Explore } name="Explore" />
       <BottomTab.Screen component={ AddPost } name="AddPost" />

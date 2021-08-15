@@ -1,22 +1,56 @@
 import moment from 'moment';
-import React, { useEffect, useState } from 'react';
-import { FlatList, Image, Text, View } from 'react-native';
-import { getRandomPhoto } from '../api/unsplash';
+import React, { useCallback, useEffect, useState } from 'react';
+import { FlatList, Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { getRandomPhoto, searchPhoto } from '../api/unsplash';
 import { useDimension } from '../helper/dimensionHook';
+import Ionicons from 'react-native-vector-icons/Ionicons'
+import _ from 'lodash'
 
 const Explore = () => {
   const [photos, setPhotos] = useState([])
   const [isLoading, setIsLoading] = useState(false)
+  const [query, setQuery] = useState('')
+
   const { window } = useDimension()
 
   const loadRandomPhotos = () => {
     if (!isLoading) {
-      console.log('Request get Photo');
+      console.log('Request get random Photo');
       setIsLoading(true)
       getRandomPhoto(15)
         .then((res) => {
-          console.log('Got response for get photo');
+          console.log('Got response for get random photo');
           setPhotos([...photos, ...res.data])
+        })
+        .catch((err) => {
+          console.log(err.message);
+        })
+        .then(() => {
+          setIsLoading(false)
+        })
+    }
+  }
+
+  const onQueryChange = (val) => {
+    setQuery(val)
+    debounce(val)
+  }
+
+  const debounce = useCallback(
+    _.debounce((_searchVal) => {
+      doSearchImage(_searchVal);
+    }, 1000),
+    []
+  )
+
+  const doSearchImage = (searchQuery) => {
+    if (!isLoading && searchQuery) {
+      console.log('Request get Photo for query : ' + searchQuery);
+      setIsLoading(true)
+      searchPhoto(searchQuery)
+        .then((res) => {
+          console.log('Got response for get photo for query : ' + searchQuery);
+          setPhotos(res.data.results)
         })
         .catch((err) => {
           console.log(err.message);
@@ -33,6 +67,23 @@ const Explore = () => {
 
   return (
     <View>
+      <View style={{
+        flexDirection: 'row',
+        backgroundColor: 'lightgrey',
+        margin: 10,
+        paddingHorizontal: 10,
+        borderRadius: 10,
+        alignItems: 'center'
+      }}>
+        <Ionicons name="search" size={ 20 }
+          style={{
+            marginRight: 10
+          }} />
+        <TextInput onChangeText={ onQueryChange } value={ query }
+          style={{
+            flex: 1
+          }} />
+      </View>
       <FlatList
         refreshing={ isLoading }
         onRefresh={ loadRandomPhotos }
