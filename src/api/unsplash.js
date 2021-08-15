@@ -14,6 +14,10 @@ export const getPhoto = (page = 1, per_page = 5) => {
   })
 }
 
-export const getRandomPhoto = () => {
-  return axios.get('/photos/random')
+export const getRandomPhoto = (count = 20) => {
+  return axios.get('/photos/random', {
+    params: {
+      count,
+    }
+  })
 }
